@@ -9,6 +9,6 @@ class {{ class }} extends Controller
 {
     public function index()
     {
-        return 'Hello World';
+        return 'Hello from {{ class }} Controler';
     }
 }

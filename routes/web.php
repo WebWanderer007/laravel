@@ -5,6 +5,7 @@ use App\Http\Controllers\Users;
 use App\Http\Controllers\UserAuth;
 use App\Http\Controllers\FileHandler;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Devices;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,5 @@ Route::post('update-user', [Users::class, 'updateUser']);
 
 Route::get('list', [Users::class, 'dbOperations']);
 Route::get('op', [Users::class, 'op']);
+
+Route::get('device/{key:device_name}', [Devices::class, 'index']);
