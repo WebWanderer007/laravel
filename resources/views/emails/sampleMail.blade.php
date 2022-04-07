@@ -14,8 +14,8 @@ This is the panel content.
 @component('mail::table')
 | Laravel       | Table         | Example  |
 | ------------- |:-------------:| --------:|
-| Col 2 is      | Centered      | $10      |
-| Col 3 is      | Right-Aligned | $20      |
+| Col 2 is here     | Centered      | $10      |
+| Col 3 is here     | Right-Aligned | $20      |
 @endcomponent
 
 Thanks,<br>
