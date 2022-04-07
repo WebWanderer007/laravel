@@ -6,6 +6,7 @@ use App\Http\Controllers\UserAuth;
 use App\Http\Controllers\FileHandler;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Devices;
+use App\Mail\sampleMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,10 @@ use App\Http\Controllers\Devices;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('sample-mail', function () {
+    return new sampleMail();
 });
 
 Route::view('login', 'login');
