@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Device;
+use PDO;
+use Validator;
 
 class DummyAPI extends Controller
 {
@@ -20,14 +22,23 @@ class DummyAPI extends Controller
 
     public function addDeviceFromPostAPI(Request $req)
     {
-        $this->device = new Device;
-        $this->device->device_name = $req->device_name;
-        $this->device->employee_id = $req->employee_id;
-        $res = $this->device->save();
-        if ($res) {
-            return ['result' => 'Data has been saved'];
+        $rules = array(
+            'employee_id' => 'required',
+        );
+        $validator  = Validator::make($req->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 401);
         } else {
-            return ['result' => 'Something went wrong!'];
+            $this->device = new Device;
+            $this->device->device_name = $req->device_name;
+            $this->device->employee_id = $req->employee_id;
+            $res = $this->device->save();
+            if ($res) {
+                return ['result' => 'Data has been saved'];
+            } else {
+                return ['result' => 'Something went wrong!'];
+            }
         }
     }
 
@@ -42,6 +53,29 @@ class DummyAPI extends Controller
             return ['result' => 'Data has been updated'];
         } else {
             return ['result' => 'Something went wrong!'];
+        }
+    }
+
+    public function deleteDevice($id = 0)
+    {
+        $device = Device::find($id);
+        $res = $device->delete();
+        if ($res) {
+            return ['Result' => "Data has beend deleted successfully"];
+        } else {
+            return ['Result' => "Something went wrong"];
+        }
+    }
+
+
+    public function search($keyword = '')
+    {
+        $res =  Device::where("device_name", 'like', '%' . $keyword . '%')->get();
+
+        if (count($res)) {
+            return $res;
+        } else {
+            return ['Result' => 'There\'s no reult found'];
         }
     }
 }

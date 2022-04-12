@@ -28,3 +28,7 @@ Route::post('save-device', [DummyAPI::class, 'addDeviceFromPostAPI']);
 
 
 Route::put('update-device', [DummyAPI::class, 'updateDevice']);
+
+Route::delete('delete-device/{id}', [DummyAPI::class, 'deleteDevice']);
+
+Route::get("search/{keyword}", [DummyAPI::class, 'search']);
